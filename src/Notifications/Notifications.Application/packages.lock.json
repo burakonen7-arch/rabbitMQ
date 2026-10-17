@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "contracts": {
+        "type": "Project"
+      },
+      "notifications.domain": {
+        "type": "Project"
+      }
+    }
+  }
+}

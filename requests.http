@@ -1,0 +1,20 @@
+### 1. Sipariş oluştur: HTTP 202, mesaj broker tarafından onaylandı
+POST http://localhost:5001/api/orders
+Content-Type: application/json
+
+{
+  "product": "Mekanik klavye",
+  "quantity": 2
+}
+
+### 2. Tüketilen mesajlar: kısa süre sonra siparişi burada görürsün
+GET http://localhost:5002/api/notifications
+
+### 3. Geçersiz istek: HTTP 400, RabbitMQ'ya gönderilmez
+POST http://localhost:5001/api/orders
+Content-Type: application/json
+
+{
+  "product": "Kalem",
+  "quantity": 0
+}

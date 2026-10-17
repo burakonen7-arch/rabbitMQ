@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "RabbitMQ.Client": {
+        "type": "Transitive",
+        "resolved": "7.2.2",
+        "contentHash": "k4b6RnTXpLbsF96V93ooNYxgPMnoA2tEm24B6AXNJr1mG8wwNYdA1XJtgU66L5xqeGyveS7SJriRzlX3cbqQNA=="
+      },
+      "contracts": {
+        "type": "Project"
+      },
+      "notifications.application": {
+        "type": "Project",
+        "dependencies": {
+          "Contracts": "[1.0.0, )",
+          "Notifications.Domain": "[1.0.0, )"
+        }
+      },
+      "notifications.domain": {
+        "type": "Project"
+      },
+      "notifications.infrastructure": {
+        "type": "Project",
+        "dependencies": {
+          "Notifications.Application": "[1.0.0, )",
+          "RabbitMQ.Client": "[7.2.2, )"
+        }
+      }
+    }
+  }
+}
