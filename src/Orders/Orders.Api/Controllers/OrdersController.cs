@@ -8,20 +8,21 @@ namespace Orders.Api.Controllers;
 
 [ApiController]
 [Route("api/orders")]
-public sealed class OrdersController(OrderService service, ILogger<OrdersController> logger) : ControllerBase
+public sealed class OrdersController(OrderService service) : ControllerBase
 {
     [HttpPost]
+    [ProducesResponseType(typeof(Order), StatusCodes.Status202Accepted)]
+    [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status503ServiceUnavailable)]
     public async Task<ActionResult<Order>> Create(CreateOrderRequest request, CancellationToken cancellationToken)
     {
         try
         {
             var order = await service.CreateAsync(request.Product, request.Quantity, cancellationToken);
-            // Broker mesajı onayladı; tüketicinin işlemesi asenkron devam eder.
             return Accepted(value: order);
         }
         catch (Exception ex) when (ex is RabbitMQClientException or IOException or TimeoutException or InvalidOperationException)
         {
-            logger.LogError(ex, "Sipariş mesajı RabbitMQ'ya gönderilemedi.");
             return Problem(statusCode: 503, title: "Mesaj gönderilemedi; RabbitMQ bağlantısını kontrol edin.");
         }
     }

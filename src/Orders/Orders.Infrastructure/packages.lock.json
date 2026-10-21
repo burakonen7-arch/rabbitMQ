@@ -20,6 +20,12 @@
       },
       "orders.domain": {
         "type": "Project"
+      },
+      "topology": {
+        "type": "Project",
+        "dependencies": {
+          "RabbitMQ.Client": "[7.2.2, )"
+        }
       }
     }
   }

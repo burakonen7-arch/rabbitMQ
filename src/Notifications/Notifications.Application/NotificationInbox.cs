@@ -14,6 +14,7 @@ public sealed class NotificationInbox
         if (message.EventId == Guid.Empty || message.OrderId == Guid.Empty ||
             string.IsNullOrWhiteSpace(message.Product) || message.Quantity < 1)
             throw new ArgumentException("Geçersiz sipariş mesajı.");
+        
         _messages.TryAdd(message.EventId, new ReceivedNotification(
             message.EventId, message.OrderId, message.Product, message.Quantity, DateTimeOffset.UtcNow));
     }

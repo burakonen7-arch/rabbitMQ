@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
     <ProjectReference Include="../Notifications.Infrastructure/Notifications.Infrastructure.csproj" />
   </ItemGroup>
 </Project>
